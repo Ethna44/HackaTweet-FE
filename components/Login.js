@@ -98,7 +98,20 @@ function Login() {
 		}
 	}
 
-  return (   
+  return (  
+	<div>
+		<div className={styles.container}>
+      <div className={styles.images}>
+      </div>
+      <div className={styles.connexion}>
+        <img className={styles.logo} src="icons8-twitter-100.png"/>
+          <h1 className={styles.titre}>See what's happening</h1>
+          <p>Join the HackaTweet Now</p>
+          <button className={styles.signin}>Sign-In</button>
+          <p>Already have an account</p>
+          <button className={styles.signup}>Sign Up</button>
+      </div>
+    </div>
     <div>
 		{isModalVisible && <div id="react-modals">
 			<Modal getContainer="#react-modals" className={styles.modal} visible={isModalVisible} closable={false} footer={null}>
@@ -106,6 +119,7 @@ function Login() {
 			</Modal>
 		</div>}
 	</div>
+	</div> 
   );
 }
 
