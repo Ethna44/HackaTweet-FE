@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.css";
+import styles from "../styles/login.module.css";
 import { useState } from "react";
 import { Modal } from "antd";
 import { login } from "../reducers/user";
@@ -107,7 +107,7 @@ function Login() {
           onChange={(e) => setSignUpFirstName(e.target.value)}
           value={signUpFirstName}
         />
-        <Link href="/" id="register" onClick={() => handleRegister()}>
+        <Link href="/home" id="register" onClick={() => handleRegister()}>
           Sign Up
         </Link>
       </div>
@@ -137,7 +137,7 @@ function Login() {
           onChange={(e) => setSignInPassword(e.target.value)}
           value={signInPassword}
         />
-		<Link href="/" id="connection" onClick={() => handleConnection()}>
+		<Link href="/home" id="connection" onClick={() => handleConnection()}>
 		Sign In
         </Link>
       </div>
