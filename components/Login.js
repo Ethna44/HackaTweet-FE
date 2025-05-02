@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.css";
+import styles from "../styles/login.module.css";
 import { useState } from "react";
 import { Modal } from "antd";
 import { login } from "../reducers/user";
