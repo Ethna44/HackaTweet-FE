@@ -4,6 +4,7 @@ import { Modal } from "antd";
 import { login } from "../reducers/user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import {faTwitter } from '@fortawesome/free-brands-svg-icons'
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
@@ -80,7 +81,8 @@ function Login() {
   let modalSignUpContent = (
     <div className={styles.registerContainer}>
       <div className={styles.registerSection}>
-        <p>Create your Hackatweet account</p>
+        <FontAwesomeIcon icon={faTwitter} className={styles.twitter}/>
+        <p className={styles.text}>Create your Hackatweet account</p>
         <FontAwesomeIcon
           onClick={showModalSignUp}
           className={styles.userSection}
@@ -92,6 +94,7 @@ function Login() {
           id="signUpUsername"
           onChange={(e) => setSignUpUsername(e.target.value)}
           value={signUpUsername}
+          className={styles.input}
         />
         <input
           type="password"
@@ -99,6 +102,7 @@ function Login() {
           id="signUpPassword"
           onChange={(e) => setSignUpPassword(e.target.value)}
           value={signUpPassword}
+        className={styles.input}          
         />
         <input
           type="text"
@@ -106,10 +110,12 @@ function Login() {
           id="signUpFirstname"
           onChange={(e) => setSignUpFirstName(e.target.value)}
           value={signUpFirstName}
+          className={styles.input}
         />
+        <button className={styles.link}>
         <Link href="/home" id="register" onClick={() => handleRegister()}>
-          Sign Up
-        </Link>
+        <p className={styles.sign}>Sign Up</p> 
+        </Link></button>
       </div>
     </div>
   );
@@ -117,7 +123,8 @@ function Login() {
   let modalSignInContent = (
     <div className={styles.registerContainer}>
       <div className={styles.registerSection}>
-        <p>Connect to Hackatweet</p>
+      <FontAwesomeIcon icon={faTwitter} className={styles.twitter}/>
+        <p className={styles.text}>Connect to Hackatweet</p>
         <FontAwesomeIcon
           onClick={showModalSignIn}
           className={styles.userSection}
@@ -129,6 +136,7 @@ function Login() {
           id="signInUsername"
           onChange={(e) => setSignInUsername(e.target.value)}
           value={signInUsername}
+          className={styles.input}
         />
         <input
           type="password"
@@ -136,10 +144,12 @@ function Login() {
           id="signInPassword"
           onChange={(e) => setSignInPassword(e.target.value)}
           value={signInPassword}
+          className={styles.input}
         />
-		<Link href="/home" id="connection" onClick={() => handleConnection()}>
-		Sign In
-        </Link>
+        <button className={styles.link}>
+		<Link href="/home" id="connection" onClick={() => handleConnection()} >
+		 <p className={styles.sign}>Sign In</p> 
+    </Link></button>
       </div>
     </div>
   );
@@ -148,14 +158,14 @@ function Login() {
     <div>
       <div className={styles.container}>
         <div className={styles.images}></div>
-        <div className={styles.connexion}>
-          <img className={styles.logo} src="icons8-twitter-100.png" />
+        <div className={styles.connexion}> 
+          <FontAwesomeIcon icon={faTwitter} className={styles.logo}/>
           <h1 className={styles.titre}>See what's happening</h1>
-          <p>Join the HackaTweet Now</p>
+          <p className={styles.join}>Join HackaTweet Today.</p>
           <button onClick={showModalSignUp} className={styles.signup}>
             Sign Up
           </button>
-          <p>Already have an account</p>
+          <p className={styles.account}>Already have an account?</p>
           <button onClick={showModalSignIn} className={styles.signin}>
             Sign In
           </button>
@@ -166,14 +176,14 @@ function Login() {
         open={isModalSignUpVisible}
         closable={false}
         footer={null}
-      >
+             >
         {modalSignUpContent}
       </Modal>
       <Modal
         className={styles.modal}
         open={isModalSignInVisible}
         closable={false}
-        footer={null}
+        footer={null}   
       >
         {modalSignInContent}
       </Modal>

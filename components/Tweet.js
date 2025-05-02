@@ -7,7 +7,7 @@ import { useDispatch ,useSelector } from 'react-redux';
 
 function Tweet() {
     const[like,setLike]=useState(0)
-
+    
     const props ={
         firstname: "Ethan",
         UserName:"Reazay",
