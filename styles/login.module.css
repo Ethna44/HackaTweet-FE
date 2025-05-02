@@ -1,0 +1,44 @@
+.container{
+  color: white;
+  display: grid;
+  grid-template-columns: repeat(10, 10vw);
+  background-color: #141C27;
+  height: 100vh;
+  width: 100vw;
+}
+
+.images{
+  grid-column-start: 1;
+  grid-column-end: 4;
+  border: 2px blue solid;
+  background-image: url("/bannerTweetFirstPage.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; 
+}
+
+.connexion{
+  padding: 20px;
+  grid-column-start: 4;
+  grid-column-end: 7;
+  border: red 2px solid
+}
+
+.titre{
+  color: white;
+  font-size: 60px;
+}
+
+.signin{
+  background-color: blue;
+  color: white;
+  width: 100px;
+  height: 20px;
+}
+
+.signup{
+  background-color: black;
+  color: aqua;
+  width: 100px;
+  height: 20px;
+}
