@@ -1,0 +1,40 @@
+
+.tweetContainer{
+    margin:0;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: auto;
+    background-color: #141C27;
+    color: white;
+    padding: 10px;
+  }
+
+  .logo{
+    height: 80px;
+    border-radius: 50%;
+    padding: 10px;
+  }
+
+  .head{
+    display: flex;
+    align-items: center;
+  }
+
+  .firstname{
+    padding: 5px;
+  }
+
+  .username{
+    padding: 5px;
+    color:grey,
+  }
+  
+  .text{
+    padding-left: 10px;
+  }
+
+  .icons{
+    padding-left: 10px;
+  }
+  

@@ -1,7 +1,8 @@
 import Login from '../components/Login';
+import Tweet from '../components/tweet';
 
 function Index() {
-  return <Login />;
+  return <Tweet />;
 }
 
 export default Index;
