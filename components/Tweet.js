@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 function Tweet(props) {
   const user = useSelector((state) => state.user.value)
   const [likes, setLikes] = useState(props.likes.length);
-  const [isLiked, setIsLiked] = useState(props.likes.includes(user._id));
+  const [isLiked, setIsLiked] = useState(props.likes.includes(user.token));
 
     const handleLikeTweet = () => {
       fetch(`http://localhost:3000/tweet/like/${props._id}`, {
@@ -32,10 +32,13 @@ function Tweet(props) {
           props.onDelete(props._id); // on déclenche un rappel dans Home
         });
     };
-
+    console.log(isLiked)
+    
     let heartIconStyle = { 'cursor': 'pointer' };
     if (isLiked) {
       heartIconStyle = { 'color': '#e74c3c', 'cursor': 'pointer' };
+    }else{
+      heartIconStyle= { 'color': 'white', 'cursor': 'pointer' }
     }
   
   return (
