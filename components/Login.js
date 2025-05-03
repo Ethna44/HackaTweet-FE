@@ -88,6 +88,14 @@ function Login() {
         />
         <input
           type="text"
+          placeholder="Firstname"
+          id="signUpFirstname"
+          onChange={(e) => setSignUpFirstName(e.target.value)}
+          value={signUpFirstName}
+          className={styles.input}
+        />
+        <input
+          type="text"
           placeholder="Username"
           id="signUpUsername"
           onChange={(e) => setSignUpUsername(e.target.value)}
@@ -100,14 +108,6 @@ function Login() {
           id="signUpPassword"
           onChange={(e) => setSignUpPassword(e.target.value)}
           value={signUpPassword}
-          className={styles.input}
-        />
-        <input
-          type="text"
-          placeholder="Firstname"
-          id="signUpFirstname"
-          onChange={(e) => setSignUpFirstName(e.target.value)}
-          value={signUpFirstName}
           className={styles.input}
         />
         <button className={styles.link} onClick={handleRegister}>
