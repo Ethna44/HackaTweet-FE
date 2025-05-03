@@ -22,7 +22,6 @@ function Login() {
 
   const [isModalSignUpVisible, setIsModalSignUpVisible] = useState(false);
   const [isModalSignInVisible, setIsModalSignInVisible] = useState(false);
-  const [userOk, setUserOk] = useState(false);
   const user = useSelector((state) => state.user.value);
 
   const handleRegister = () => {
@@ -43,7 +42,6 @@ function Login() {
           setSignUpPassword("");
           setSignUpFirstName("");
           setIsModalSignUpVisible(false);
-          setUserOk(true);
           router.push("/home");
         }
       });
@@ -65,7 +63,6 @@ function Login() {
           setSignInUsername("");
           setSignInPassword("");
           setIsModalSignInVisible(false);
-          setUserOk(true);
           router.push("/home");
         }
       });
