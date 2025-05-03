@@ -18,6 +18,7 @@ function Home() {
   const handleLogout = () => {
     dispatch(logout());
   };
+
   const [tweetData, setTweetData] = useState([])
   useEffect(() => {
     fetch('http://localhost:3000')
@@ -35,6 +36,27 @@ function Home() {
   // const updateLikedTweets = (content) => {
   //   if (likedTweets.find(tweet => tweet ===))
   // }
+
+  const [tweetContent, setTweetContent] = useState('')
+  const handleTweetSubmit = () => {
+    fetch('http://localhost:3000/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        content: tweetContent,
+        token: user.token,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          // On ajoute le tweet fraîchement créé au début du tableau
+          setTweetData([data.tweet, ...tweetData]);
+          setTweetContent('');
+          setCharCount(0);
+        }
+      });
+  };
 
   const props = {
     firstname: "Tiago",
@@ -62,7 +84,9 @@ function Home() {
           <h5 className={styles.title}>Home</h5>
           <textarea
             maxLength={charLimit}
-            onChange={(e) => setCharCount(e.target.value.length)}
+            onChange={(e) => {
+              setCharCount(e.target.value.length)
+              setTweetContent(e.target.value)}}
             type="text"
               rows="3"
               cols="90"
@@ -72,7 +96,7 @@ function Home() {
             <span>
               {charCount}/{charLimit}
             </span>
-            <button className={styles.tweetbutton}>TWEET</button>
+            <button onClick={handleTweetSubmit} className={styles.tweetbutton}>TWEET</button>
           </div>
         </div>
         <div className={styles.tweet}>
