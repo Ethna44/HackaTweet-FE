@@ -21,7 +21,7 @@ function Home() {
 
   const [tweetData, setTweetData] = useState([])
   useEffect(() => {
-    fetch('http://localhost:3000')
+    fetch('http://localhost:3000/tweet')
       .then(response => response.json())
       .then(data => {
         setTweetData(data.tweet)
@@ -39,7 +39,7 @@ function Home() {
 
   const [tweetContent, setTweetContent] = useState('')
   const handleTweetSubmit = () => {
-    fetch('http://localhost:3000/', {
+    fetch('http://localhost:3000/tweet', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

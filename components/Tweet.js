@@ -27,7 +27,7 @@ function Tweet(props) {
         <p>{props.content}</p>
       </div>
       <div className={styles.icons}>
-        <span><FontAwesomeIcon onClick={() => handleLikeTweet()} icon={faHeart} className={styles.heart} style={heartIconStyle} /></span><span> {like} </span>
+        <span><FontAwesomeIcon onClick={() => handleLikeTweet()} icon={faHeart} className={styles.heart} style={heartIconStyle} /></span><span> {/* {like} */} </span>
         <span><FontAwesomeIcon icon={faTrash} className={styles.heart} /></span>
       </div>
     </div>
