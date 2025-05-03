@@ -2,9 +2,11 @@ import styles from "../styles/Home.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { login, logout } from "../reducers/user";
+import { faTwitter } from '@fortawesome/free-brands-svg-icons'
+//import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { logout } from "../reducers/user";
 import Image from "next/image";
+import Tweet from "./Tweet";
 
 function Home() {
   const dispatch = useDispatch();
@@ -16,28 +18,38 @@ function Home() {
   const handleLogout = () => {
     dispatch(logout());
   };
+  const [tweetData, setTweetData] = useState([])
+  useEffect(() => {
+    fetch('http://localhost:3000')
+      .then(response => response.json())
+      .then(data => {
+        setTweetData(data.tweet)
+      });
+  }, []);
+
+  const tweet = tweetData.map((data, i) => {
+    return <Tweet key={i} {...data}/>
+  })
+
+  // const [likedTweets, setLikedTweets]
+  // const updateLikedTweets = (content) => {
+  //   if (likedTweets.find(tweet => tweet ===))
+  // }
 
   const props = {
-    firstname: "HarryPotdeBeurre",
-    username: "@FuttBuker3000",
+    firstname: "Tiago",
+    username: "@Tiago3000",
   };
   return (
     <div>
       <div className={styles.container}>
         <div className={styles.main}>
           <div className={styles.logomain}>
-            <Image
-              src="/logotwitter.png"
-              alt="Logo"
-              height={100}
-              width={100}
-              className={styles.logo}
-            ></Image>
+            <FontAwesomeIcon icon={faTwitter} className={styles.twitter}/>
           </div>
           <div>
             <div className={styles.logoutSection}>
               <Image src="/oeuf.jpeg" alt="Logo" height={50} width={50} />
-
               <h3 className={styles.title}>{props.firstname}</h3>
               <p>{props.username}</p>
               <button className={styles.button} onClick={() => handleLogout()}>
@@ -54,20 +66,20 @@ function Home() {
             type="text"
               rows="3"
               cols="90"
-            placeholder="Créer   votre prochain drama/cyberharcelement."
+            placeholder="What's up?"
           />
           <div className={styles.tweetsection}>
             <span>
               {charCount}/{charLimit}
             </span>
-            <button className={styles.tweetbutton}> TWEET</button>
+            <button className={styles.tweetbutton}>TWEET</button>
           </div>
         </div>
         <div className={styles.tweet}>
-              
+          {tweet}    
         </div>
         <div className={styles.trend}>
-          <h1 className={styles.title}> Trends</h1>
+          <h1 className={styles.title}>Trends</h1>
         </div>
       </div>
     </div>

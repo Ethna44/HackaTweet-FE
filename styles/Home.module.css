@@ -77,10 +77,11 @@
   width: 100%;
 }
 
-.logo {
-  width: 150px;
-  aspect-ratio: 1;
-  border-radius: 50%;
+.twitter{
+  height: 50px;
+  padding: 20px;
+  color: white;
+  transform: rotateY(180deg)rotateX(180deg);
 }
 
 .logoutSection {

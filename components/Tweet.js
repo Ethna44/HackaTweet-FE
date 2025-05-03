@@ -5,30 +5,29 @@ import {useState} from 'react'
 import { useDispatch ,useSelector } from 'react-redux';
 
 
-function Tweet() {
-    const[like,setLike]=useState(0)
-    
-    const props ={
-        firstname: "Ethan",
-        UserName:"Reazay",
-        Text: 'vive pokemon',    
+function Tweet(props) {
+
+    const handleLikeTweet = () => {
+      props.updateLikedTweets(props.content)
     }
-
-    
-
+    let heartIconStyle = { 'cursor': 'pointer' };
+    if (props.isLiked) {
+      heartIconStyle = { 'color': '#e74c3c', 'cursor': 'pointer' };
+    }
+  
   return (
     <div className={styles.tweetContainer}>
       <div className={styles.head}>
         <img src='twitter.webp' className={styles.logo} alt="User avatar" />
-        <p className={styles.firstName}>{props.firstname}</p>
-        <p className={styles.username}>@{props.UserName}</p>
+        <p className={styles.firstName}>{props.user.firstname}</p>
+        <p className={styles.username}>@{props.user.username}</p>
         <p className={styles.username}> · heure</p>
       </div>
       <div className={styles.text}>
-        <p>{props.Text}</p>
+        <p>{props.content}</p>
       </div>
       <div className={styles.icons}>
-        <span><FontAwesomeIcon icon={faHeart} className={styles.heart} /></span><span> {like} </span>
+        <span><FontAwesomeIcon onClick={() => handleLikeTweet()} icon={faHeart} className={styles.heart} style={heartIconStyle} /></span><span> {like} </span>
         <span><FontAwesomeIcon icon={faTrash} className={styles.heart} /></span>
       </div>
     </div>
