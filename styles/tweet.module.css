@@ -25,13 +25,14 @@
     align-items: center;
   }
 
-  .firstname{
-    padding: 5px;
+  .firstName{
     font-weight: bold;
+    color: white;
+    font-size: 16px;
   }
 
   .username{
-    padding: 5px;
+    padding-right: 5px;
     color:grey,
   }
   
