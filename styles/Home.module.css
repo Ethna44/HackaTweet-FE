@@ -27,13 +27,14 @@
   justify-content: start;
   align-items: flex-start; /* Changé pour aligner à gauche */
   grid-row-start: 1;
-  grid-row-end: 5;
+  grid-row-end: 4;
   grid-column-start: 4;
   grid-column-end: 10;
   border-bottom: 1px grey solid;
   padding: 15px;
   gap: 10px;
   width: 100%; /* Ajouté pour occuper toute la largeur */
+  border-right: 1px solid grey;
 }
 
 .trend {
@@ -45,7 +46,6 @@
   grid-row-end: 13;
   grid-column-start: 10;
   grid-column-end: 13;
-  border-left: 1px grey solid;
   padding: 15px;
   gap: 10px;
   width: 100%; /* Ajouté pour occuper toute la largeur */
@@ -106,15 +106,16 @@
 }
 
 .tweetList {
-  grid-row-start: 5;
+  grid-row-start: 4;
   grid-row-end: 13;
   grid-column-start: 4;
   grid-column-end: 10;
   overflow-y: auto;
-  padding: 10px 15px;
+  padding: 10px 0px;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  border-right: 1px solid grey;
 }
 
 .trendsContainer {
@@ -150,6 +151,7 @@
   color: whitesmoke;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 10px;
   color: #8899a6;
 }

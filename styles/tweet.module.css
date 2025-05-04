@@ -6,8 +6,9 @@
     height: auto;
     width: auto;
     background-color: #141C27;
-    padding: 10px;
     color: white;
+    border-bottom: grey 1px solid;
+    padding-left: 15px;
   }
   .head{
     color: grey;
@@ -34,12 +35,8 @@
     color:grey,
   }
   
-  .text{
-    padding-left: 10px;
-  }
-
   .icons{
-    padding-left: 10px;
+    padding-bottom: 15px;
   }
 
 
