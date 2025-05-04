@@ -2,74 +2,118 @@ import styles from "../styles/Home.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { login, logout } from "../reducers/user";
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { logout } from "../reducers/user";
 import Image from "next/image";
+import Tweet from "./Tweet";
 import Tweet from "../components/Tweet"
 
 function Home() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-
+  const hashtag = useSelector((state)=>state.hashtag.value)
   const [charCount, setCharCount] = useState(0);
+  const [tweetContent, setTweetContent] = useState('');
+  const [tweetData, setTweetData] = useState([]);
   const charLimit = 280;
+
+  console.log(hashtag)
+
+  // Récupération des tweets au chargement
+  useEffect(() => {
+    fetch('http://localhost:3000/tweet')
+      .then(response => response.json())
+      .then(data => {
+        setTweetData(data.tweet);
+      });
+  }, []);
 
   const handleLogout = () => {
     dispatch(logout());
   };
 
-  const props = {
-    firstname: "HarryPotdeBeurre",
-    username: "@FuttBuker3000",
+  const handleTweetSubmit = () => {
+    if (!tweetContent.trim()) return; //évite d'envoyer un tweet vide
+
+    fetch('http://localhost:3000/tweet', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        content: tweetContent,
+        token: user.token,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.result) {
+          setTweetData([data.tweet, ...tweetData]);
+          setTweetContent('');
+          setCharCount(0);
+        }
+      });
   };
+
+  const handleDeleteTweet = (idToDelete) => {
+    setTweetData(tweetData.filter(tweet => tweet._id !== idToDelete));
+  };
+
+  const tweets = tweetData.map((data, i) => (
+    <Tweet key={i} {...data} onDelete={handleDeleteTweet} />
+  ));
+
   return (
     <div>
       <div className={styles.container}>
         <div className={styles.main}>
           <div className={styles.logomain}>
-            <Image
-              src="/logotwitter.png"
-              alt="Logo"
-              height={100}
-              width={100}
-              className={styles.logo}
-            ></Image>
+            <FontAwesomeIcon icon={faTwitter} className={styles.twitter} />
           </div>
           <div>
-            <div className={styles.logoutSection}>
+            <div className={styles.logoutContainer}>
               <Image src="/oeuf.jpeg" alt="Logo" height={50} width={50} />
-
-              <h3 className={styles.title}>{props.firstname}</h3>
-              <p>{props.username}</p>
-              <button className={styles.button} onClick={() => handleLogout()}>
+              <h3 className={styles.title}>{user.firstname}</h3>
+              <p>@{user.username}</p>
+              <button className={styles.button} onClick={handleLogout}>
                 Logout
               </button>
             </div>
           </div>
         </div>
+
         <div className={styles.home}>
           <h5 className={styles.title}>Home</h5>
-          <textarea
+          <div className={styles.tweetInputContainer}>
+            <textarea
             maxLength={charLimit}
-            onChange={(e) => setCharCount(e.target.value.length)}
-            type="text"
-              rows="3"
-              cols="90"
-            placeholder="Créer   votre prochain drama/cyberharcelement."
+            value={tweetContent}
+            onChange={(e) => {
+              setCharCount(e.target.value.length);
+              setTweetContent(e.target.value);
+            }}
+            rows="3"
+            cols="90"
+            placeholder="What's up?"
           />
           <div className={styles.tweetsection}>
-            <span>
-              {charCount}/{charLimit}
-            </span>
-            <button className={styles.tweetbutton}> TWEET</button>
+            <span>{charCount}/{charLimit}</span>
+            <button onClick={handleTweetSubmit} className={styles.tweetbutton}>
+              TWEET
+            </button>
+          </div>
           </div>
           <div className={styles.tweet}>
            <Tweet></Tweet>   
         </div>
+
+        <div className={styles.tweetList}>
+          {tweets}
         </div>
         
         <div className={styles.trend}>
           <h1 className={styles.title}> Trends</h1>
+
+        <div className={styles.trendsContainer}>
+          <h1 className={styles.title}>Trends</h1>
         </div>
       </div>
     </div>

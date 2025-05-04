@@ -4,13 +4,15 @@ import { Modal } from "antd";
 import { login } from "../reducers/user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Link from "next/link";
+import { useRouter } from 'next/router';
 import "antd/dist/antd.css";
 
 function Login() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [signUpUsername, setSignUpUsername] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
   const [signUpFirstName, setSignUpFirstName] = useState("");
@@ -20,8 +22,6 @@ function Login() {
 
   const [isModalSignUpVisible, setIsModalSignUpVisible] = useState(false);
   const [isModalSignInVisible, setIsModalSignInVisible] = useState(false);
-  const [userOk, setUserOk] = useState(false);
-
   const user = useSelector((state) => state.user.value);
 
   const handleRegister = () => {
@@ -29,7 +29,7 @@ function Login() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-		firstname: signUpFirstName,
+        firstname: signUpFirstName,
         username: signUpUsername,
         password: signUpPassword,
       }),
@@ -42,7 +42,7 @@ function Login() {
           setSignUpPassword("");
           setSignUpFirstName("");
           setIsModalSignUpVisible(false);
-          setUserOk(true);
+          router.push("/home");
         }
       });
   };
@@ -63,13 +63,12 @@ function Login() {
           setSignInUsername("");
           setSignInPassword("");
           setIsModalSignInVisible(false);
-          setUserOk(true);
+          router.push("/home");
         }
       });
   };
 
   const showModalSignUp = () => {
-    console.log("here");
     setIsModalSignUpVisible(!isModalSignUpVisible);
   };
 
@@ -77,10 +76,11 @@ function Login() {
     setIsModalSignInVisible(!isModalSignInVisible);
   };
 
-  let modalSignUpContent = (
+  const modalSignUpContent = (
     <div className={styles.registerContainer}>
       <div className={styles.registerSection}>
-        <p>Create your Hackatweet account</p>
+        <FontAwesomeIcon icon={faTwitter} className={styles.twitter}/>
+        <p className={styles.text}>Create your Hackatweet account</p>
         <FontAwesomeIcon
           onClick={showModalSignUp}
           className={styles.userSection}
@@ -88,10 +88,19 @@ function Login() {
         />
         <input
           type="text"
+          placeholder="Firstname"
+          id="signUpFirstname"
+          onChange={(e) => setSignUpFirstName(e.target.value)}
+          value={signUpFirstName}
+          className={styles.input}
+        />
+        <input
+          type="text"
           placeholder="Username"
           id="signUpUsername"
           onChange={(e) => setSignUpUsername(e.target.value)}
           value={signUpUsername}
+          className={styles.input}
         />
         <input
           type="password"
@@ -99,25 +108,20 @@ function Login() {
           id="signUpPassword"
           onChange={(e) => setSignUpPassword(e.target.value)}
           value={signUpPassword}
+          className={styles.input}
         />
-        <input
-          type="text"
-          placeholder="Firstname"
-          id="signUpFirstname"
-          onChange={(e) => setSignUpFirstName(e.target.value)}
-          value={signUpFirstName}
-        />
-        <Link href="/home" id="register" onClick={() => handleRegister()}>
-          Sign Up
-        </Link>
+        <button className={styles.link} onClick={handleRegister}>
+          <p className={styles.sign}>Sign Up</p>
+        </button>
       </div>
     </div>
   );
 
-  let modalSignInContent = (
+  const modalSignInContent = (
     <div className={styles.registerContainer}>
       <div className={styles.registerSection}>
-        <p>Connect to Hackatweet</p>
+        <FontAwesomeIcon icon={faTwitter} className={styles.twitter}/>
+        <p className={styles.text}>Connect to Hackatweet</p>
         <FontAwesomeIcon
           onClick={showModalSignIn}
           className={styles.userSection}
@@ -129,6 +133,7 @@ function Login() {
           id="signInUsername"
           onChange={(e) => setSignInUsername(e.target.value)}
           value={signInUsername}
+          className={styles.input}
         />
         <input
           type="password"
@@ -136,10 +141,11 @@ function Login() {
           id="signInPassword"
           onChange={(e) => setSignInPassword(e.target.value)}
           value={signInPassword}
+          className={styles.input}
         />
-		<Link href="/home" id="connection" onClick={() => handleConnection()}>
-		Sign In
-        </Link>
+        <button className={styles.link} onClick={handleConnection}>
+          <p className={styles.sign}>Sign In</p>
+        </button>
       </div>
     </div>
   );
@@ -149,13 +155,13 @@ function Login() {
       <div className={styles.container}>
         <div className={styles.images}></div>
         <div className={styles.connexion}>
-          <img className={styles.logo} src="icons8-twitter-100.png" />
+          <FontAwesomeIcon icon={faTwitter} className={styles.logo}/>
           <h1 className={styles.titre}>See what's happening</h1>
-          <p>Join the HackaTweet Now</p>
+          <p className={styles.join}>Join HackaTweet Today.</p>
           <button onClick={showModalSignUp} className={styles.signup}>
             Sign Up
           </button>
-          <p>Already have an account</p>
+          <p className={styles.account}>Already have an account?</p>
           <button onClick={showModalSignIn} className={styles.signin}>
             Sign In
           </button>

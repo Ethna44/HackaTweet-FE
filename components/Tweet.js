@@ -1,35 +1,69 @@
 import styles from '../styles/tweet.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faHeart,faTrash} from "@fortawesome/free-solid-svg-icons";
-import {useState} from 'react'
-import { useDispatch ,useSelector } from 'react-redux';
+import { faHeart,faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { addTrend } from '../reducers/hashtag';
+import { useEffect } from 'react';
 
 
-function Tweet() {
-    const[like,setLike]=useState(0)
+function Tweet(props) {
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.value)
+  const [likes, setLikes] = useState(props.likes.length);
+  const [isLiked, setIsLiked] = useState(props.likes.includes(user.token));
 
-    const props ={
-        firstname: "Ethan",
-        UserName:"Reazay",
-        Text: 'vive pokemon',    
+    const handleLikeTweet = () => {
+      fetch(`http://localhost:3000/tweet/like/${props._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: user._id }),
+      })
+        .then(res => res.json())
+        .then(data => {
+          setLikes(data.tweet.likes.length);
+          setIsLiked(data.tweet.likes.includes(user.token));
+        });
+    };
+  
+    const handleDeleteTweet = () => {
+      fetch(`http://localhost:3000/tweet/${props._id}`, {
+        method: 'DELETE',
+      })
+        .then(res => res.json())
+        .then(() => {
+          props.onDelete(props._id); // on déclenche un rappel dans Home
+        });
+    };
+    
+    let heartIconStyle = { 'cursor': 'pointer' };
+    if (isLiked) {
+      heartIconStyle = { 'color': '#e74c3c', 'cursor': 'pointer' };
+    }else{
+      heartIconStyle = { 'color': 'white', 'cursor': 'pointer' }
     }
 
-    
+    useEffect(() => {
+      const message = props.content;
+      const regex = /#([\p{L}_][\p{L}\p{N}_]*)/gu;
+      const regTweet = message.match(regex);
+        dispatch(addTrend(regTweet));
+    }, [props.content]);
 
   return (
     <div className={styles.tweetContainer}>
       <div className={styles.head}>
         <img src='twitter.webp' className={styles.logo} alt="User avatar" />
-        <p className={styles.firstName}>{props.firstname}</p>
-        <p className={styles.username}>@{props.UserName}</p>
-        <p className={styles.username}> · heure</p>
+        <p className={styles.firstName}>{props.user.firstname}</p>
+        <p className={styles.username}>@{props.user.username}</p>
+        <p className={styles.username}>· {new Date(props.createdAt).toLocaleTimeString()}</p>
       </div>
       <div className={styles.text}>
-        <p>{props.Text}</p>
+      <p>{props.content}</p>
       </div>
       <div className={styles.icons}>
-        <span><FontAwesomeIcon icon={faHeart} className={styles.heart} /></span><span> {like} </span>
-        <span><FontAwesomeIcon icon={faTrash} className={styles.heart} /></span>
+        <span><FontAwesomeIcon onClick={() => handleLikeTweet()} icon={faHeart} className={styles.heart} style={heartIconStyle} /></span><span> {likes} </span>
+        <span><FontAwesomeIcon onClick={() => handleDeleteTweet()} icon={faTrash} className={styles.trash} /></span>
       </div>
     </div>
   );
