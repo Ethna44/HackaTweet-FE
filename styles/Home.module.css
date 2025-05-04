@@ -12,13 +12,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
   grid-row-start: 1;
   grid-row-end: 13;
   grid-column-start: 1;
   grid-column-end: 4;
   border-right: 1px grey solid;
-  overflow-y: auto;
 }
 
 .home {
@@ -70,12 +68,14 @@
 
 .button {
   height: 25px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
-  color: rgb(242, 185, 54);
+  color: white;
   background-color: transparent;
-  border: none;
+  border: 1px white solid;
   cursor: pointer;
+  width: 30%;
+  border-radius: 20px;
 }
 
 .logomain {
@@ -92,10 +92,22 @@
 .logoutContainer {
   display: flex;
   flex-direction: column;
+  padding: 20px;
+  color: white;
+ 
+}
+
+.topLog{
+  display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 15px;
-  border-bottom: 1px solid grey;
+  padding-bottom: 20px;
+}
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover; /* Assure un bon rendu */
+  flex-shrink: 0;
 }
 
 .tweetInputContainer {
@@ -154,4 +166,21 @@
   justify-content: flex-end;
   gap: 10px;
   color: #8899a6;
+}
+
+.user{
+  padding-left: 10px;
+}
+
+.firstname{
+  font-weight: bold;
+  color: white;
+  font-size: 16px;
+  margin: 0;
+}
+
+.username{
+  padding-right: 5px;
+  color:grey;
+  margin: 0;
 }
