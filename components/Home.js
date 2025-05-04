@@ -7,6 +7,7 @@ import { logout } from "../reducers/user";
 import Image from "next/image";
 import Tweet from "./Tweet";
 
+
 function Home() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
@@ -68,14 +69,20 @@ fetch('http://localhost:3000/tweet', {
             <FontAwesomeIcon icon={faTwitter} className={styles.twitter} />
           </div>
           <div>
+
             <div className={styles.logoutContainer}>
-              <Image src="/oeuf.jpeg" alt="Logo" height={50} width={50} />
-              <h3 className={styles.title}>{user.firstname}</h3>
-              <p>@{user.username}</p>
+              <div className={styles.topLog}>
+              <Image className={styles.logo} src="/twitter.webp" alt="Logo" width={50} height={50}  />
+              <div className={styles.user}>
+              <p className={styles.firstname}>{user.firstname}</p>
+              <p className={styles.username}>@{user.username}</p>
+              </div>
+              </div>
               <button className={styles.button} onClick={handleLogout}>
                 Logout
               </button>
             </div>
+
           </div>
         </div>
 

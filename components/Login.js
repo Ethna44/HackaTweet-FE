@@ -37,7 +37,7 @@ function Login() {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          dispatch(login({ username: signUpUsername, token: data.token }));
+          dispatch(login({ username: signUpUsername,firstname: signUpFirstName, token: data.token }));
           setSignUpUsername("");
           setSignUpPassword("");
           setSignUpFirstName("");
@@ -59,7 +59,7 @@ function Login() {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          dispatch(login({ username: signInUsername, token: data.token }));
+          dispatch(login({ username: signInUsername,firstname: data.firstname ,token:data.token }));
           setSignInUsername("");
           setSignInPassword("");
           setIsModalSignInVisible(false);
