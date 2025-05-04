@@ -1,12 +1,13 @@
 import '../styles/globals.css';
 import Head from 'next/head';
 import user from '../reducers/user'
+import hashtag from '../reducers/hashtag'
 
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 
 const store = configureStore({
- reducer: {user},
+ reducer: {user, hashtag},
 });
 
 function App({ Component, pageProps }) {

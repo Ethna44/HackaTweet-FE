@@ -3,9 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart,faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { addTrend } from '../reducers/hashtag';
+import { useEffect } from 'react';
 
 
 function Tweet(props) {
+  const dispatch = useDispatch()
   const user = useSelector((state) => state.user.value)
   const [likes, setLikes] = useState(props.likes.length);
   const [isLiked, setIsLiked] = useState(props.likes.includes(user.token));
@@ -32,7 +35,6 @@ function Tweet(props) {
           props.onDelete(props._id); // on déclenche un rappel dans Home
         });
     };
-    console.log(isLiked)
     
     let heartIconStyle = { 'cursor': 'pointer' };
     if (isLiked) {
@@ -40,6 +42,15 @@ function Tweet(props) {
     }else{
       heartIconStyle = { 'color': 'white', 'cursor': 'pointer' }
     }
+
+    useEffect(() => {
+      const message = props.content;
+      const regex = /#(\w*[A-Za-z_]+\w*)/g;
+      const regTweet = message.match(regex);
+      if (regTweet) {
+        dispatch(addTrend(regTweet));
+      }
+    }, [props.content]);
 
   return (
     <div className={styles.tweetContainer}>

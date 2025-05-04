@@ -10,11 +10,13 @@ import Tweet from "./Tweet";
 function Home() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-
+  const hashtag = useSelector((state)=>state.hashtag.value)
   const [charCount, setCharCount] = useState(0);
   const [tweetContent, setTweetContent] = useState('');
   const [tweetData, setTweetData] = useState([]);
   const charLimit = 280;
+
+  console.log(hashtag)
 
   // Récupération des tweets au chargement
   useEffect(() => {
