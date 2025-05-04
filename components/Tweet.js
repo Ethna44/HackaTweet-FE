@@ -47,7 +47,9 @@ function Tweet(props) {
       const message = props.content;
       const regex = /#([\p{L}_][\p{L}\p{N}_]*)/gu;
       const regTweet = message.match(regex);
+      if(regTweet){
         dispatch(addTrend(regTweet));
+      }
     }, [props.content]);
 
   return (
