@@ -32,6 +32,7 @@ function Home() {
 
   const handleLogout = () => {
     dispatch(logout());
+    window.location.href = '/';
   };
 
   const handleTweetSubmit = () => {
