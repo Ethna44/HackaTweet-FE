@@ -29,17 +29,22 @@ function Tweet(props) {
     const handleDeleteTweet = () => {
       fetch(`http://localhost:3000/tweet/${props._id}`, {
         method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${user.token}`, //envoi du token
+        },
       })
         .then(res => res.json())
-        .then(() => {
-          props.onDelete(props._id); // on déclenche un rappel dans Home
+        .then(data => {
+          if (data.result) {
+            // suppression autorisée => on met à jour le state
+            props.onDelete(props._id);
+          }
         });
     };
     
     let heartIconStyle = { 'cursor': 'pointer' };
     if (isLiked) {
       heartIconStyle = { 'color': '#e74c3c', 'cursor': 'pointer' };
-    }else{
+    } else {
       heartIconStyle = { 'color': 'white', 'cursor': 'pointer' }
     }
 
@@ -70,5 +75,6 @@ function Tweet(props) {
     </div>
   );
 }
+
 
 export default Tweet;
