@@ -6,6 +6,8 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { logout } from "../reducers/user";
 import Image from "next/image";
 import Tweet from "./Tweet";
+import Trends from "./trends";
+
 
 function Home() {
   const dispatch = useDispatch();
@@ -106,9 +108,12 @@ fetch('http://localhost:3000/tweet', {
       {tweets}
     </div>
 
-    <div className={styles.trendsContainer}>
+    <div className={styles.trend}>
       <h1 className={styles.title}>Trends</h1>
+      <Trends/>
+      
     </div>
+
   </div>
 </div>
   );

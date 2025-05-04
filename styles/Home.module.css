@@ -118,14 +118,14 @@
   border-right: 1px solid grey;
 }
 
-.trendsContainer {
+/* .trendsContainer {
   width: 100%;
   padding: 15px;
   border-left: 1px solid grey;
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
+} */
 
 .tweetbutton {
   border-radius: 20px;

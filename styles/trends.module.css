@@ -1,0 +1,47 @@
+.trendContainer {
+    padding: 10px;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    flex-wrap: wrap;
+    
+  }
+
+
+.trendTitle {
+    line-height: 1.15;
+    font-size: 20px;
+    color: whitesmoke;
+    margin-bottom: 10px;
+  }
+
+  .trendBox {
+    background-color: #1e2732;
+    border-radius: 15px;
+    padding: 15px;
+    width: 250% ;
+  }
+
+  .trendContent {
+    margin-bottom: 30px;
+  }
+  
+  .hashtag {
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .count {
+    font-size: 14px;
+    color: #8899a6;
+    margin: 0;
+  } 
+
+
+  .hashtag:hover {
+    text-decoration: underline;
+    color: #1da1f2; /* bleu Twitter */
+    cursor: pointer;
+  }
+  
+  
