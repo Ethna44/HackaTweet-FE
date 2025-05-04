@@ -71,7 +71,6 @@ fetch('http://localhost:3000/tweet', {
             <FontAwesomeIcon icon={faTwitter} className={styles.twitter} />
           </div>
           <div>
-
             <div className={styles.logoutContainer}>
               <div className={styles.topLog}>
               <Image className={styles.logo} src="/twitter.webp" alt="Logo" width={50} height={50}  />
@@ -101,6 +100,7 @@ fetch('http://localhost:3000/tweet', {
         rows="3"
         cols="90"
         placeholder="What's up?"
+        className={styles.textarea}
       />
       <div className={styles.tweetsection}>
         <span>{charCount}/{charLimit}</span>

@@ -184,3 +184,9 @@
   color:grey;
   margin: 0;
 }
+
+.textarea{
+  background-color:#141c27 ;
+  border: none;
+  border-bottom: 1px solid grey;
+}
