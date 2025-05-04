@@ -78,14 +78,14 @@ function Login() {
 
   const modalSignUpContent = (
     <div className={styles.registerContainer}>
-      <div className={styles.registerSection}>
-        <FontAwesomeIcon icon={faTwitter} className={styles.twitter}/>
-        <p className={styles.text}>Create your Hackatweet account</p>
-        <FontAwesomeIcon
+        <div className={styles.closingmark}><FontAwesomeIcon
           onClick={showModalSignUp}
           className={styles.userSection}
           icon={faXmark}
-        />
+        /></div>
+        <div className={styles.registerSection}>
+        <FontAwesomeIcon icon={faTwitter} className={styles.twitter}/>
+        <p className={styles.text}>Create your Hackatweet account</p>
         <input
           type="text"
           placeholder="Firstname"
@@ -119,14 +119,14 @@ function Login() {
 
   const modalSignInContent = (
     <div className={styles.registerContainer}>
-      <div className={styles.registerSection}>
-        <FontAwesomeIcon icon={faTwitter} className={styles.twitter}/>
-        <p className={styles.text}>Connect to Hackatweet</p>
-        <FontAwesomeIcon
+      <div className={styles.closingmark}><FontAwesomeIcon
           onClick={showModalSignIn}
           className={styles.userSection}
           icon={faXmark}
-        />
+        /></div>
+        <div className={styles.registerSection}>
+        <FontAwesomeIcon icon={faTwitter} className={styles.twitter}/>
+        <p className={styles.text}>Connect to Hackatweet</p>
         <input
           type="text"
           placeholder="Username"

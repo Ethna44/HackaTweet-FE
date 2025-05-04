@@ -54,8 +54,7 @@
 .registerContainer{
   color: white;
   background-color: #141C27;
-  display: flex;
-  justify-content: center;
+  padding : 15px
 }
 
 .registerSection{
@@ -112,4 +111,8 @@
   height: 50px;
   transform: rotateY(180deg)rotateX(180deg);
   margin-bottom: 50px;
+}
+
+.closingmark {
+  text-align: right;
 }
