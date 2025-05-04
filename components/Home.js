@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { login, logout } from "../reducers/user";
 import Image from "next/image";
+import Tweet from "../components/Tweet"
 
 function Home() {
   const dispatch = useDispatch();
@@ -62,10 +63,11 @@ function Home() {
             </span>
             <button className={styles.tweetbutton}> TWEET</button>
           </div>
+          <div className={styles.tweet}>
+           <Tweet></Tweet>   
         </div>
-        <div className={styles.tweet}>
-              
         </div>
+        
         <div className={styles.trend}>
           <h1 className={styles.title}> Trends</h1>
         </div>
