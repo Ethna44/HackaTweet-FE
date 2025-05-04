@@ -27,7 +27,7 @@
   justify-content: start;
   align-items: flex-start; /* Changé pour aligner à gauche */
   grid-row-start: 1;
-  grid-row-end: 3;
+  grid-row-end: 4;
   grid-column-start: 4;
   grid-column-end: 10;
   border-bottom: 1px grey solid;
@@ -106,7 +106,7 @@
 }
 
 .tweetList {
-  grid-row-start: 3;
+  grid-row-start: 4;
   grid-row-end: 13;
   grid-column-start: 4;
   grid-column-end: 10;
