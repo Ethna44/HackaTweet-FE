@@ -6,8 +6,11 @@
     height: auto;
     width: auto;
     background-color: #141C27;
-    color: white;
     padding: 10px;
+    color: white;
+  }
+  .head{
+    color: grey;
   }
 
   .logo{
@@ -23,6 +26,7 @@
 
   .firstname{
     padding: 5px;
+    font-weight: bold;
   }
 
   .username{
@@ -37,4 +41,6 @@
   .icons{
     padding-left: 10px;
   }
+
+
   

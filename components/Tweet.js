@@ -19,7 +19,7 @@ function Tweet(props) {
         .then(res => res.json())
         .then(data => {
           setLikes(data.tweet.likes.length);
-          setIsLiked(data.tweet.likes.includes(user._id));
+          setIsLiked(data.tweet.likes.includes(user.token));
         });
     };
   
@@ -38,24 +38,23 @@ function Tweet(props) {
     if (isLiked) {
       heartIconStyle = { 'color': '#e74c3c', 'cursor': 'pointer' };
     }else{
-      heartIconStyle= { 'color': 'white', 'cursor': 'pointer' }
+      heartIconStyle = { 'color': 'white', 'cursor': 'pointer' }
     }
-  
+
   return (
     <div className={styles.tweetContainer}>
       <div className={styles.head}>
         <img src='twitter.webp' className={styles.logo} alt="User avatar" />
         <p className={styles.firstName}>{props.user.firstname}</p>
         <p className={styles.username}>@{props.user.username}</p>
-        <p className={styles.username}>{new Date(props.createdAt).toLocaleTimeString()}</p>
-        <div><FontAwesomeIcon icon={faUser} className={styles.heart} /></div>
+        <p className={styles.username}>· {new Date(props.createdAt).toLocaleTimeString()}</p>
       </div>
       <div className={styles.text}>
-        <p>{props.content}</p>
+      <p>{props.content}</p>
       </div>
       <div className={styles.icons}>
         <span><FontAwesomeIcon onClick={() => handleLikeTweet()} icon={faHeart} className={styles.heart} style={heartIconStyle} /></span><span> {likes} </span>
-        <span><FontAwesomeIcon onClick={() => handleDeleteTweet()} icon={faTrash} className={styles.heart} /></span>
+        <span><FontAwesomeIcon onClick={() => handleDeleteTweet()} icon={faTrash} className={styles.trash} /></span>
       </div>
     </div>
   );
