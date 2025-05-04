@@ -9,7 +9,11 @@ export const hashtagSlice = createSlice({
   initialState,
   reducers: {
     addTrend: (state, action) => {
-      state.value = [...state.value, ...action.payload];
+      const combined = [...state.value, ...action.payload];
+
+      const unique = [...new Set(combined)];
+
+      state.value = unique;
     },
   },
 });

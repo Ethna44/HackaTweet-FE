@@ -45,7 +45,7 @@ function Tweet(props) {
 
     useEffect(() => {
       const message = props.content;
-      const regex = /#(\w*[A-Za-z_]+\w*)/g;
+      const regex = /#([\p{L}_][\p{L}\p{N}_]*)/gu;
       const regTweet = message.match(regex);
       if (regTweet) {
         dispatch(addTrend(regTweet));
