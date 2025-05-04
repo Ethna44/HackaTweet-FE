@@ -9,8 +9,8 @@ export const hashtagSlice = createSlice({
   initialState,
   reducers: {
     addTrend: (state, action) => {
-      state.value = [...state.value, ...action.payload];
-    },
+      state.value.push(...action.payload)
+    }
   },
 });
 
