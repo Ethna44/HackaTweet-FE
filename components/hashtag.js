@@ -6,6 +6,7 @@ import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { login, logout } from "../reducers/user";
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import Image from "next/image";
+import Link from 'next/link';
 
 function Hashtag() {
   const dispatch = useDispatch();
@@ -28,7 +29,9 @@ function Hashtag() {
       <div className={styles.container}>
         <div className={styles.main}>
           <div className={styles.logomain}>
-           <FontAwesomeIcon icon={faTwitter} className={styles.logo}/>
+            <Link href="/home">
+            <FontAwesomeIcon  icon={faTwitter} className={styles.logo}/>
+            </Link>
           </div>
           <div>
             <div className={styles.logoutSection}>
