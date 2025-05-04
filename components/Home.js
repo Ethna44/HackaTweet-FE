@@ -34,22 +34,22 @@ function Home() {
   const handleTweetSubmit = () => {
     if (!tweetContent.trim()) return; //évite d'envoyer un tweet vide
 
-    fetch('http://localhost:3000/tweet', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        content: tweetContent,
-        token: user.token,
-      }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.result) {
-          setTweetData([data.tweet, ...tweetData]);
-          setTweetContent('');
-          setCharCount(0);
-        }
-      });
+fetch('http://localhost:3000/tweet', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    content: tweetContent,
+    token: user.token,
+  }),
+})
+  .then(response => response.json())
+  .then(data => {
+    if (data.result) {
+      setTweetData([data.tweet, ...tweetData]);
+      setTweetContent('');
+      setCharCount(0);
+    }
+  });
   };
 
   const handleDeleteTweet = (idToDelete) => {
@@ -79,38 +79,38 @@ function Home() {
           </div>
         </div>
 
-        <div className={styles.home}>
-          <h5 className={styles.title}>Home</h5>
-          <div className={styles.tweetInputContainer}>
-            <textarea
-            maxLength={charLimit}
-            value={tweetContent}
-            onChange={(e) => {
-              setCharCount(e.target.value.length);
-              setTweetContent(e.target.value);
-            }}
-            rows="3"
-            cols="90"
-            placeholder="What's up?"
-          />
-          <div className={styles.tweetsection}>
-            <span>{charCount}/{charLimit}</span>
-            <button onClick={handleTweetSubmit} className={styles.tweetbutton}>
-              TWEET
-            </button>
-          </div>
-          </div>
-        </div>
-
-        <div className={styles.tweetList}>
-          {tweets}
-        </div>
-
-        <div className={styles.trendsContainer}>
-          <h1 className={styles.title}>Trends</h1>
-        </div>
+    <div className={styles.home}>
+      <h5 className={styles.title}>Home</h5>
+      <div className={styles.tweetInputContainer}>
+        <textarea
+        maxLength={charLimit}
+        value={tweetContent}
+        onChange={(e) => {
+          setCharCount(e.target.value.length);
+          setTweetContent(e.target.value);
+        }}
+        rows="3"
+        cols="90"
+        placeholder="What's up?"
+      />
+      <div className={styles.tweetsection}>
+        <span>{charCount}/{charLimit}</span>
+        <button onClick={handleTweetSubmit} className={styles.tweetbutton}>
+          TWEET
+        </button>
+      </div>
       </div>
     </div>
+
+    <div className={styles.tweetList}>
+      {tweets}
+    </div>
+
+    <div className={styles.trendsContainer}>
+      <h1 className={styles.title}>Trends</h1>
+    </div>
+  </div>
+</div>
   );
 }
 
