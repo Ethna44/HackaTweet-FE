@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: {}
+  value: []
 };
 
 export const hashtagSlice = createSlice({
@@ -9,24 +9,10 @@ export const hashtagSlice = createSlice({
   initialState,
   reducers: {
     addTrend: (state, action) => {
-      // for (let i = 0; i < action.payload.length; i++) {
-      //   const tag = action.payload[i]*
-      //pour les bébés
-     
-      action.payload.forEach(tag => { 
-        if(state.value[tag]){
-          state.value[tag]++
-          
-        } else{
-          state.value[tag]=1
-        }
-      });
-    },
-    resetAllTrends:(state)=>{
-      state.value= {}
+      state.value = [...state.value,...action.payload]
     }
   },
 });
 
-export const { addTrend , resetAllTrends} = hashtagSlice.actions;
+export const { addTrend } = hashtagSlice.actions;
 export default hashtagSlice.reducer;

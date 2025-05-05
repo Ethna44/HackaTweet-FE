@@ -86,6 +86,7 @@
   padding: 20px;
   color: white;
   transform: rotateY(180deg) rotateX(180deg);
+  cursor: pointer;
 }
 
 .logoutContainer {
