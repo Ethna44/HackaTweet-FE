@@ -8,22 +8,32 @@ import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import Image from "next/image";
 import Link from "next/link";
 import Trends from "./trends";
+import Tweet from "./Tweet";
 import { useRouter } from "next/router";
 
 
 function Hashtag() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-  console.log(user);
+  const hash = useSelector((state) => state.hashtag.value);
   const [charCount, setCharCount] = useState(0);
   const charLimit = 280;
   const [hashtag, setHashtag] = useState("");
   const router = useRouter();
+  const [tweetData,setTweetData]= useState("")
 
   const handleLogout = () => {
     dispatch(logout());
     router.push("/"); //A utilser plutot que windows Location pour éviter de render de nouveau la page, un peu comme <Link>
   };
+
+  useEffect(() => {
+      fetch("http://localhost:3000/tweet")
+        .then((response) => response.json())
+        .then((data) => {
+          setTweetData(data.tweet);
+        });
+    }, []);
 
 
   return (
@@ -39,12 +49,11 @@ function Hashtag() {
             <div className={styles.logoutSection}>
              <div className={styles.topLog}>
               <Image  className={styles.logo} src="/twitter.webp" alt="Logo" height={50} width={50} />
-
              <div className={styles.user}>
                               <p className={styles.firstname}>{user.firstname}</p>
                               <p className={styles.username}>@{user.username}</p>
                             </div>
-                            </div>
+                      </div>
               <button className={styles.button} onClick={() => handleLogout()}>
                 Logout
               </button>
@@ -54,7 +63,7 @@ function Hashtag() {
         <div className={styles.hashtag}>
           <h2 className={styles.title}>Hashtag</h2>
           <input
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setHashtag(e.target.value)}
             value={hashtag}
             className={styles.input}
           />

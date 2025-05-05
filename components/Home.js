@@ -5,11 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { logout } from "../reducers/user";
 import { addTrend } from '../reducers/hashtag';
+import { useRouter } from 'next/router';
 import Image from "next/image";
 import Tweet from "./Tweet";
 import Trends from "./trends";
 
 function Home() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const hashtag = useSelector((state) => state.hashtag.value);
@@ -33,14 +35,13 @@ function Home() {
             dispatch(addTrend(regTweet));
           }   
         }
-        
       });
   }, []);
 
 
   const handleLogout = () => {
     dispatch(logout());
-    window.location.href = "/";
+    router.push('/')
   };
 
   const handleTweetSubmit = () => {
@@ -85,7 +86,6 @@ function Home() {
             <FontAwesomeIcon
               icon={faTwitter}
               className={styles.twitter}
-              onClick={handleLoginPage}
             />
           </div>
           <div>
