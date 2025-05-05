@@ -3,13 +3,11 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
-import { login,logout } from "../reducers/user";
+import { logout } from "../reducers/user";
+import { addTrend } from '../reducers/hashtag';
 import Image from "next/image";
 import Tweet from "./Tweet";
 import Trends from "./trends";
-import Link from "next/link";
-import Login from "../components/Login";
-import { useRouter } from "next/router";
 
 function Home() {
   const dispatch = useDispatch();
@@ -19,9 +17,6 @@ function Home() {
   const [tweetContent, setTweetContent] = useState("");
   const [tweetData, setTweetData] = useState([]);
   const charLimit = 280;
-  const router = useRouter();
-
-  console.log(hashtag);
 
   // Récupération des tweets au chargement
   useEffect(() => {
@@ -29,16 +24,23 @@ function Home() {
       .then((response) => response.json())
       .then((data) => {
         setTweetData(data.tweet);
+        
+        for(let i = 0 ; i < data.tweet.length ;i++){
+          const message = data.tweet[i].content;
+          const regex = /#([\p{L}_][\p{L}\p{N}_]*)/gu;
+          const regTweet = message.match(regex);
+          if(regTweet){
+            dispatch(addTrend(regTweet));
+          }   
+        }
+        
       });
   }, []);
 
+
   const handleLogout = () => {
     dispatch(logout());
-    router.push("/"); //A utilser plutot que windows Location pour éviter de render de nouveau la page, un peu comme <Link>
-  };
-
-  const handleLoginPage = () => {
-    router.push("/");
+    window.location.href = "/";
   };
 
   const handleTweetSubmit = () => {
@@ -55,20 +57,25 @@ function Home() {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          setTweetData([data.tweet, ...tweetData]);
+          setTweetData([...tweetData,data.tweet]);
           setTweetContent("");
           setCharCount(0);
+          const message = data.content;
+          const regex = /#([\p{L}_][\p{L}\p{N}_]*)/gu;
+          const regTweet = message.match(regex);
+          dispatch(addTrend(regTweet));
         }
       });
   };
 
   const handleDeleteTweet = (idToDelete) => {
-    setTweetData(tweetData.filter((tweet) => tweet._id !== idToDelete));
+      setTweetData(tweetData.filter((tweet) => tweet._id !== idToDelete));
   };
 
   const tweets = tweetData.map((data, i) => (
     <Tweet key={i} {...data} onDelete={handleDeleteTweet} />
   ));
+
 
   return (
     <div>

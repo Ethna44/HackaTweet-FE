@@ -48,15 +48,6 @@ function Tweet(props) {
       heartIconStyle = { 'color': 'white', 'cursor': 'pointer' }
     }
 
-    useEffect(() => {
-      const message = props.content;
-      const regex = /#([\p{L}_][\p{L}\p{N}_]*)/gu;
-      const regTweet = message.match(regex);
-      if(regTweet){
-        dispatch(addTrend(regTweet));
-      }
-    }, [props.content]);
-
   return (
     <div className={styles.tweetContainer}>
       <div className={styles.head}>
