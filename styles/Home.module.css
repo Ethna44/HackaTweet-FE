@@ -123,6 +123,7 @@
   grid-column-start: 4;
   grid-column-end: 10;
   overflow-y: auto;
+  scrollbar-color: grey #141c27 ;
   padding: 10px 0px;
   display: flex;
   flex-direction: column;
