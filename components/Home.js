@@ -44,7 +44,7 @@ function Home() {
 
   const handleLogout = () => {
     dispatch(logout());
-    router.push('/')
+    router.push('/');
   };
 
   const handleTweetSubmit = () => {
