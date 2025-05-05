@@ -24,6 +24,10 @@
   .trendContent {
     margin-bottom: 30px;
   }
+
+  .trendContent:hover {
+    background-color: #232D3B
+   }
   
   .hashtag {
     font-weight: bold;
@@ -39,8 +43,6 @@
 
 
   .hashtag:hover {
-    text-decoration: underline;
-    color: #1da1f2; /* bleu Twitter */
     cursor: pointer;
   }
   
