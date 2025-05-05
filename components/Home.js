@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { logout } from "../reducers/user";
-import { addTrend } from '../reducers/hashtag';
-import { useRouter } from 'next/router';
+import { setTrends } from "../reducers/hashtag";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import Tweet from "./Tweet";
 import Trends from "./trends";
@@ -24,15 +24,18 @@ function Home() {
     fetch("http://localhost:3000/tweet/" + user?.token)
       .then((response) => response.json())
       .then((data) => {
-        setTweetData(data.tweet);
-        for(let i = 0 ; i < data.tweet.length ;i++){
+        let allTrends = [];
+
+        for (let i = 0; i < data.tweet.length; i++) {
           const message = data.tweet[i].content;
           const regex = /#([\p{L}_][\p{L}\p{N}_]*)/gu;
           const regTweet = message.match(regex);
-          if(regTweet){
-            dispatch(addTrend(regTweet));
-          }   
+
+          regTweet && (allTrends = [...allTrends, ...regTweet]);
         }
+
+        setTweetData(data.tweet.sort((a, b) => b.date - a.date));
+        dispatch(setTrends(allTrends));
       });
   };
 
@@ -41,10 +44,9 @@ function Home() {
     fetchTweets();
   }, [user.token]);
 
-
   const handleLogout = () => {
     dispatch(logout());
-    router.push('/')
+    router.push("/");
   };
 
   const handleTweetSubmit = () => {
@@ -61,19 +63,20 @@ function Home() {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          setTweetData([...tweetData,data.tweet]);
+          setTweetData([data.tweet, ...tweetData]);
           setTweetContent("");
           setCharCount(0);
           const message = data.content;
           const regex = /#([\p{L}_][\p{L}\p{N}_]*)/gu;
           const regTweet = message.match(regex);
-          dispatch(addTrend(regTweet));
+          regTweet && dispatch(setTrends([...hashtag, ...regTweet]));
         }
       });
   };
 
   const handleDeleteTweet = (idToDelete) => {
     setTweetData(tweetData.filter((tweet) => tweet._id !== idToDelete));
+    fetchTweets();
   };
 
   const tweets = tweetData.map((data, i) => (
@@ -87,16 +90,12 @@ function Home() {
     />
   ));
 
-
   return (
     <div>
       <div className={styles.container}>
         <div className={styles.main}>
           <div className={styles.logomain}>
-            <FontAwesomeIcon
-              icon={faTwitter}
-              className={styles.twitter}
-            />
+            <FontAwesomeIcon icon={faTwitter} className={styles.twitter} />
           </div>
           <div>
             <div className={styles.logoutContainer}>

@@ -15,7 +15,7 @@ function Trends() {
         <Link href="/hashtag" className={styles.hashtag}>
           {tag}
         </Link>
-        <p className={styles.countTweet}>{count}</p>
+        <p className={styles.countTweet}>{count} Tweet</p>
       </div>
     );
   }
