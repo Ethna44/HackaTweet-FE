@@ -20,7 +20,7 @@ function Hashtag() {
   const charLimit = 280;
   const [hashtag, setHashtag] = useState("");
   const router = useRouter();
-  const [tweetData,setTweetData]= useState("")
+  const [tweetData,setTweetData]= useState([])
 
   const handleLogout = () => {
     dispatch(logout());
@@ -35,6 +35,13 @@ function Hashtag() {
         });
     }, []);
 
+    const Filtered = tweetData.filter((data) => hash.includes(data))
+
+    if(Filtered.includes(hashtag)){
+        Filtered.map((data,i)=>(
+          <Tweet key={i} {...data}/>
+        ))
+    }
 
   return (
     <div>
@@ -68,7 +75,9 @@ function Hashtag() {
             className={styles.input}
           />
         </div>
-        <div className={styles.tweet}></div>
+        <div className={styles.tweet}>
+          {Filtered}
+        </div>
         <div className={styles.trend}>
           <h1 className={styles.title}> Trends</h1>
           <Trends />

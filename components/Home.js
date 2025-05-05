@@ -25,6 +25,7 @@ function Home() {
       .then((response) => response.json())
       .then((data) => {
         setTweetData(data.tweet);
+     
         for(let i = 0 ; i < data.tweet.length ;i++){
           const message = data.tweet[i].content;
           const regex = /#([\p{L}_][\p{L}\p{N}_]*)/gu;
