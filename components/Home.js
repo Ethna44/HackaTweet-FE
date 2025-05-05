@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { logout } from "../reducers/user";
+import { addTrend } from '../reducers/hashtag';
 import Image from "next/image";
 import Tweet from "./Tweet";
 import Trends from "./trends";
@@ -30,8 +31,10 @@ function Home() {
     fetchTweets();
   }, [user.token]);
 
+
   const handleLogout = () => {
     dispatch(logout());
+    router.push('/')
   };
 
   const handleTweetSubmit = () => {
@@ -48,9 +51,13 @@ function Home() {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          setTweetData([data.tweet, ...tweetData]);
+          setTweetData([...tweetData,data.tweet]);
           setTweetContent("");
           setCharCount(0);
+          const message = data.content;
+          const regex = /#([\p{L}_][\p{L}\p{N}_]*)/gu;
+          const regTweet = message.match(regex);
+          dispatch(addTrend(regTweet));
         }
       });
   };
@@ -70,12 +77,17 @@ function Home() {
     />
   ));
 
+
   return (
     <div>
       <div className={styles.container}>
         <div className={styles.main}>
           <div className={styles.logomain}>
-            <FontAwesomeIcon icon={faTwitter} className={styles.twitter} />
+            <FontAwesomeIcon
+              icon={faTwitter}
+              className={styles.twitter}
+              onClick={handleLoginPage}
+            />
           </div>
           <div>
             <div className={styles.logoutContainer}>

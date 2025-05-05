@@ -1,4 +1,4 @@
-import Hashtag from '../components/Hashtag';
+import Hashtag from "../components/hashtag";
 
 function HashtagPage() {
   return <Hashtag />;

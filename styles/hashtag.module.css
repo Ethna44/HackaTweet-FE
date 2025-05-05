@@ -40,12 +40,14 @@
   
   .button {
     height: 25px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
-    color: rgb(242, 185, 54);
+    color: white;
     background-color: transparent;
-    border: none;
+    border: 1px white solid;
     cursor: pointer;
+    width: 75%;
+    border-radius: 20px;
   }
   
   .container {
@@ -115,3 +117,41 @@
     padding: 20px;
   }
   
+  .firstname{
+    font-weight: bold;
+    color: white;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .username{
+    padding-right: 5px;
+    color:grey;
+    margin: 0;
+  }
+
+  .logoutSection {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    color: white;
+   
+  }
+
+  .topLog{
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover; 
+    flex-shrink: 0;
+  }
+
+  .user{
+    padding-left: 10px;
+  }
