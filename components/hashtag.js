@@ -7,6 +7,7 @@ import { login, logout } from "../reducers/user";
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import Image from "next/image";
 import Link from 'next/link';
+import Trends from "./trends";
 
 function Hashtag() {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ function Hashtag() {
         </div>
         <div className={styles.trend}>
           <h1 className={styles.title}> Trends</h1>
+          <Trends/>
         </div>
       </div>
     </div>
