@@ -13,20 +13,18 @@ import Trends from "./trends";
 function Home() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.value);
+  const user = useSelector((state) => state.user.value); // renvoie token, first name et username
   const hashtag = useSelector((state) => state.hashtag.value);
   const [charCount, setCharCount] = useState(0);
   const [tweetContent, setTweetContent] = useState("");
   const [tweetData, setTweetData] = useState([]);
   const charLimit = 280;
 
-  // Récupération des tweets au chargement
-  useEffect(() => {
-    fetch("http://localhost:3000/tweet")
+  const fetchTweets = () => {
+    fetch("http://localhost:3000/tweet/" + user?.token)
       .then((response) => response.json())
       .then((data) => {
         setTweetData(data.tweet);
-        
         for(let i = 0 ; i < data.tweet.length ;i++){
           const message = data.tweet[i].content;
           const regex = /#([\p{L}_][\p{L}\p{N}_]*)/gu;
@@ -36,7 +34,12 @@ function Home() {
           }   
         }
       });
-  }, []);
+  };
+
+  // Récupération des tweets au chargement
+  useEffect(() => {
+    fetchTweets();
+  }, [user.token]);
 
 
   const handleLogout = () => {
@@ -70,11 +73,18 @@ function Home() {
   };
 
   const handleDeleteTweet = (idToDelete) => {
-      setTweetData(tweetData.filter((tweet) => tweet._id !== idToDelete));
+    setTweetData(tweetData.filter((tweet) => tweet._id !== idToDelete));
   };
 
   const tweets = tweetData.map((data, i) => (
-    <Tweet key={i} {...data} onDelete={handleDeleteTweet} />
+    <Tweet
+      key={i}
+      {...data}
+      likeCount={data.likes.length}
+      onDelete={handleDeleteTweet}
+      isLiked={data.hasLiked}
+      fetchTweets={fetchTweets}
+    />
   ));
 
 
