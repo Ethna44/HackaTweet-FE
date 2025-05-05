@@ -8,6 +8,9 @@ import { addTrend } from '../reducers/hashtag';
 import Image from "next/image";
 import Tweet from "./Tweet";
 import Trends from "./trends";
+import { useRouter } from "next/router";
+import Link from "next/link";
+
 
 function Home() {
   const dispatch = useDispatch();
@@ -17,6 +20,7 @@ function Home() {
   const [tweetContent, setTweetContent] = useState("");
   const [tweetData, setTweetData] = useState([]);
   const charLimit = 280;
+  const router = useRouter();
 
   // Récupération des tweets au chargement
   useEffect(() => {
@@ -40,7 +44,7 @@ function Home() {
 
   const handleLogout = () => {
     dispatch(logout());
-    window.location.href = "/";
+    router.push("/");
   };
 
   const handleTweetSubmit = () => {
@@ -85,7 +89,7 @@ function Home() {
             <FontAwesomeIcon
               icon={faTwitter}
               className={styles.twitter}
-              onClick={handleLoginPage}
+            
             />
           </div>
           <div>
@@ -140,6 +144,7 @@ function Home() {
         </div>
 
         <div className={styles.tweetList}>{tweets}</div>
+      
 
         <div className={styles.trend}>
           <h1 className={styles.title}>Trends</h1>
