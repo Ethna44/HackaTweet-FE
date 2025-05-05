@@ -29,9 +29,12 @@ function Trends() {
    </div>
 
    <div className={styles.trendContent}><p className={styles.hashtag}>#cenation </p>
+
         <p className={styles.countTweet}> 1000 Tweets</p>
         </div>
         
+
+
         </div>
       </div>
 
