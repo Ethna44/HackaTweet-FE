@@ -9,7 +9,6 @@ import Tweet from "./Tweet";
 import Trends from "./trends";
 
 
-
 function Home() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
